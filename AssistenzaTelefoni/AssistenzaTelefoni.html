@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Assistenza Telefoni</title>
+<style>
+    body {
+        font-family: Arial;
+        margin: 30px;
+    }
+    table {
+        border-collapse: collapse;
+        width: 550px;
+        margin: 0 auto;
+    }
+    th, td {
+        border: 1px solid black;
+        padding: 6px 10px;
+        vertical-align: top;
+    }
+    th {
+        background-color: darkseagreen;
+        color: black;
+    }
+    td {
+        background-color: beige;
+        width: 50%;
+    }
+    input[type="text"], select, textarea {
+        width: 96%;
+    }
+    .pulsante {
+        text-align: center;
+        margin-top: 20px;
+    }
+	
+	textarea {
+	    resize: none;
+	    min-height: 70px;
+	}
+</style>
+<script>
+	let formOg;
+	let ricevutaOg;
+	
+	function inizializza() {
+		
+		formOg = document.getElementById("areaForm").innerHTML;
+		ricevutaOg = document.getElementById("areaRicevuta").innerHTML;
+		document.getElementById("areaRicevuta").innerHTML = "";		
+	}
+	
+	function generaRicevuta() {
+		let nome = document.getElementById("nome").value;
+		let cognome = document.getElementById("cognome").value;
+		let codiceFiscale = document.getElementById("codiceFiscale").value;		
+		let citta = document.getElementById("citta").value;		
+		let gestore = document.getElementById("gestore").value;		
+		let telefono = document.getElementById("telefono").value;		
+		let marca = document.getElementById("marca").value;
+		let modello = document.getElementById("modello").value;	
+		let problema = document.getElementById("problema").value;
+		let recapito = document.getElementById("recapito").value;
+		
+		if (
+		        nome == "" ||
+		        cognome == "" ||
+		        codiceFiscale == "" ||
+		        citta == "" ||
+		        gestore == "" ||
+		        telefono == "" ||
+		        marca == "" ||
+		        modello == "" ||
+		        problema == ""
+		    ) {
+		        alert("Per favore compila tutti i campi obbligatori!");
+		    } else {
+		        if (recapito == "") {
+		            recapito = telefono;
+		        }
+
+		        document.getElementById("areaForm").innerHTML = "";
+		        document.getElementById("areaRicevuta").innerHTML = ricevutaOg;
+
+		        document.getElementById("ricNome").innerHTML = nome;
+		        document.getElementById("ricCognome").innerHTML = cognome;
+		        document.getElementById("ricCodiceFiscale").innerHTML = codiceFiscale;
+		        document.getElementById("ricCitta").innerHTML = citta;
+		        document.getElementById("ricGestore").innerHTML = gestore;
+		        document.getElementById("ricTelefono").innerHTML = telefono;
+		        document.getElementById("ricMarca").innerHTML = marca;
+		        document.getElementById("ricModello").innerHTML = modello;
+		        document.getElementById("ricProblema").innerHTML = problema;
+		        document.getElementById("ricRecapito").innerHTML = recapito;
+		    }
+		}
+
+		function tornaAlForm() {
+		    document.getElementById("areaRicevuta").innerHTML = "";
+		    document.getElementById("areaForm").innerHTML = formOg;
+		}
+</script>
+</head>
+<body onload="inizializza()">
+	<div id="areaForm">
+		<form name="formAssistenza">
+			<table>
+				<tr>
+					<th colspan="2">Riparazioni Telefoniche - Via Palmiro Togliatti 3, Macerata<br>Ricevuta di consegna</th>
+				</tr>
+				<tr>
+				    <td>Nome</td>
+				    <td><input type="text" id="nome"></td>
+				</tr>
+				<tr>
+					<td>Cognome</td>
+					<td><input type="text" id="cognome"></td>
+				</tr>
+				<tr>
+					<td>Codice Fiscale</td>
+					<td><input type="text" id="codiceFiscale"></td>
+				</tr>
+				<tr>
+					<td>Citta</td>
+					<td><input type="text" id="citta"></td>
+				</tr>
+				<tr>
+					<td>Gestore Telefonico</td>
+					<td>
+						<select id="gestore">
+							<option value="">-- Scegli --</option>
+							<option value="TIM">TIM</option>	
+							<option value="Vodafone">Vodafone</option>
+							<option value="WindTre">WindTre</option>
+							<option value="Illiad">Illiad</option>
+							<option value="Fastweb">Fastweb</option>
+							<option value="Altro">Altro</option>																																																
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Numero di telefono dispotivo</td>
+					<td><input type="text" id="telefono"></td>
+				</tr>
+				<tr>
+					<td>Marca Dispositivo</td>
+					<td>
+						<select id="marca">
+							<option value="">-- Scegli --</option>
+							<option value="Samsung">TIM</option>	
+							<option value="Apple">Vodafone</option>
+							<option value="LG">WindTre</option>
+							<option value="Motorola">Illiad</option>
+							<option value="Xiaomi">Fastweb</option>
+							<option value="Altro">Altro</option>																																																
+						</select>
+					</td>
+				</tr>
+				<tr>
+				    <td>Modello dispositivo</td>
+				    <td><input type="text" id="modello"></td>
+				</tr>
+				<tr>
+					<td>Breve descrizione del problema</td>
+					<td><textarea id="problema" rows="4"></textarea></td>
+				</tr>
+				<tr>
+					<td>Recapito di contatto (se diverso dal numero del dispositivo in riparazione)</td>
+					<td><input type="text" id="recapito"></td>
+				</tr>
+			</table>
+			<div class="pulsante">
+				<input type="button" value="Genera ricevuta" onclick="generaRicevuta()">								
+			</div>
+		</form>
+	</div>
+	
+	<div id="areaRicevuta">	
+		<table>
+			<tr>
+				<th colspan="2">Riparazioni Telefoniche - Via Palmiro Togliatti 3, Macerata<br>Ricevuta di consegna</th>
+			</tr>
+			<tr>
+			    <td>Nome</td>
+			    <td id="ricNome"></td>
+			</tr>
+			<tr>
+				<td>Cognome</td>
+				<td id="ricCognome"></td>
+			</tr>
+			<tr>
+				<td>Codice Fiscale</td>
+				<td id="ricCodiceFiscale"></td>
+			</tr>
+			<tr>
+				<td>Citta</td>
+				<td id="ricCitta"></td>
+			</tr>
+			<tr>
+				<td>Gestore Telefonico</td>
+				<td id="ricGestore"></td>
+			</tr>
+			<tr>
+				<td>Numero di telefono dispotivo</td>
+				<td id="ricTelefono"></td>
+			</tr>
+			<tr>
+				<td>Marca Dispositivo</td>
+				<td id="ricMarca"></td>
+			</tr>
+			<tr>
+			    <td>Modello dispositivo</td>
+			    <td id="ricModello"></td>
+			</tr>
+			<tr>
+				<td>Breve descrizione del problema</td>
+				<td id="ricProblema"></td>
+			</tr>
+			<tr>
+				<td>Recapito di contatto (se diverso dal numero del dispositivo in riparazione)</td>
+				<td id="ricRecapito"></td>
+			</tr>
+		</table>
+		<div class="pulsante">
+			<input type="button" value="Genera ricevuta" onclick="tornaAlForm()">								
+		</div>
+	</div>	
+
+</body>
+</html>
